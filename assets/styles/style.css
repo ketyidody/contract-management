@@ -1,0 +1,62 @@
+body {
+  background-color: #5CDB95;
+  color: #05386B;
+  font-size: 20px;
+}
+body a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+body nav {
+  display: flex;
+  height: 50px;
+  flex-direction: row;
+  flex: 1;
+}
+body nav .site__logo {
+  display: flex;
+  margin: 15px;
+  font-weight: 600;
+}
+body nav .navItem {
+  list-style: none;
+  display: flex;
+  margin: 15px;
+}
+body main table {
+  width: 100%;
+  margin-bottom: 15px;
+}
+body main table thead {
+  background-color: #479683;
+  color: #EDF5E1;
+}
+body main table tbody tr:nth-child(even) {
+  background-color: #EDF5E1;
+}
+body main table tbody tr:nth-child(odd) {
+  background-color: #8EE4AF;
+}
+body main a {
+  border: 1px solid;
+  border-radius: 20px;
+  text-decoration: none;
+  background-color: #99738E;
+  color: #EDF5E1;
+  padding: 0 20px;
+}
+body main a:active, body main a:visited {
+  background-color: #99738E;
+  text-decoration: none;
+  color: #EDF5E1;
+}
+body main a:hover {
+  color: #EDF5E1;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+body main .html5_datepicker {
+  width: 220px;
+}
+
+/*# sourceMappingURL=style.css.map */

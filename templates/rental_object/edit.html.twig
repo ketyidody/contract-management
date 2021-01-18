@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RentalObject{% endblock %}
+
+{% block body %}
+    <h1>Edit RentalObject</h1>
+
+    {{ include('rental_object/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rental_object_index') }}">back to list</a>
+
+    {{ include('rental_object/_delete_form.html.twig') }}
+{% endblock %}

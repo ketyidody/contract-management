@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RentalObject{% endblock %}
+
+{% block body %}
+    <h1>RentalObject</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rental_object.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ rental_object.name }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ rental_object.address }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ rental_object.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ rental_object.country }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfRooms</th>
+                <td>{{ rental_object.numberOfRooms }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ rental_object.description }}</td>
+            </tr>
+            <tr>
+                <th>Contract</th>
+                <td>
+                    <a href="{{ url('contract_show', {'id': rental_object.contract.id}) }}">
+                        {{ rental_object.contract }}
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('rental_object_index') }}">back to list</a>
+
+    <a href="{{ path('rental_object_edit', {'id': rental_object.id}) }}">edit</a>
+
+    {{ include('rental_object/_delete_form.html.twig') }}
+{% endblock %}

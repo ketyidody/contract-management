@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contract{% endblock %}
+
+{% block body %}
+    <h1>Contract</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ contract.id }}</td>
+        </tr>
+        <tr>
+            <th>StartDate</th>
+            <td>{{ contract.startDate ? contract.startDate|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>EndDate</th>
+            <td>{{ contract.endDate ? contract.endDate|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>NoticePeriod</th>
+            <td>{{ contract.noticePeriod }}</td>
+        </tr>
+        <tr>
+            <th>Rent</th>
+            <td>{{ contract.rent }}</td>
+        </tr>
+        <tr>
+            <th>Contract Parties</th>
+            <td>
+                {% for contractParty in contract.contractParties %}
+                    <a href="{{ path('person_show', {'id':  contractParty.id}) }}">
+                        {{ contractParty }}
+                    </a>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Rental Object</th>
+            <td>
+                <a href="{{ path('rental_object_show', {'id': contract.rentalObject.id}) }}">
+                    {{ contract.rentalObject }}
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('contract_index') }}">back to list</a>
+
+    <a href="{{ path('contract_edit', {'id': contract.id}) }}">edit</a>
+
+    {{ include('contract/_delete_form.html.twig') }}
+{% endblock %}

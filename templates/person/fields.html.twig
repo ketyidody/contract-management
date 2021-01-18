@@ -1,0 +1,7 @@
+{% block field_row %}
+    <div class="row">
+        {{ form_errors(form) }}
+        {{ form_label(form) }}
+        {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+{% endblock field_row %}

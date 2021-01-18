@@ -1,0 +1,76 @@
+body {
+  background-color: #5CDB95;
+  color: #05386B;
+  font-size: 20px;
+
+  a:hover {
+    text-decoration: none;
+    color: inherit;;
+  }
+
+  nav {
+    display: flex;
+    height: 50px;
+    flex-direction: row;
+    flex: 1;
+
+    .site__logo {
+      display: flex;
+      margin: 15px;
+      font-weight: 600;
+    }
+
+    .navItem {
+      list-style: none;
+      display: flex;
+      margin: 15px;
+    }
+  }
+
+  main {
+    table {
+      width: 100%;
+      margin-bottom: 15px;
+
+      thead {
+        background-color: #479683;
+        color: #EDF5E1;
+      }
+
+      tbody {
+        tr:nth-child(even) {
+          background-color: #EDF5E1;
+        }
+        tr:nth-child(odd) {
+          background-color: #8EE4AF;
+        }
+      }
+    }
+
+    a {
+      border: 1px solid;
+      border-radius: 20px;
+      text-decoration: none;
+      background-color: #99738E;
+      color: #EDF5E1;
+      padding: 0 20px;
+
+      &:active, &:visited {
+        background-color: #99738E;
+        text-decoration: none;
+        color: #EDF5E1;
+      }
+
+      &:hover {
+        color: #EDF5E1;
+        text-decoration: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    .html5_datepicker {
+      width: 220px;
+    }
+
+  }
+}

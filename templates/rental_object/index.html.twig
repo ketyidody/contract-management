@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RentalObject index{% endblock %}
+
+{% block body %}
+    <h1>RentalObject index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>NumberOfRooms</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rental_object in rental_objects %}
+            <tr>
+                <td>{{ rental_object.id }}</td>
+                <td>{{ rental_object.name }}</td>
+                <td>{{ rental_object.address }}</td>
+                <td>{{ rental_object.city }}</td>
+                <td>{{ rental_object.country }}</td>
+                <td>{{ rental_object.numberOfRooms }}</td>
+                <td>{{ rental_object.description }}</td>
+                <td>
+                    <a href="{{ path('rental_object_show', {'id': rental_object.id}) }}">show</a>
+                    <a href="{{ path('rental_object_edit', {'id': rental_object.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('rental_object_new') }}">Create new</a>
+{% endblock %}
