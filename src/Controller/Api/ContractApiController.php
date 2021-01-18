@@ -2,28 +2,28 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Person;
-use App\Repository\PersonRepository;
+use App\Entity\Contract;
+use App\Repository\ContractRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Component\Routing\Annotation\Route;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
- * @Route("/person")
+ * @Route("/contract")
  */
-class PersonApiController extends AbstractFOSRestController
+class ContractApiController extends AbstractFOSRestController
 {
     /**
      * @Rest\Get("/index")
      *
      * @return Response
      */
-    public function index(PersonRepository $personRepository)
+    public function index(ContractRepository $contractRepository)
     {
-        $persons = $personRepository->findAll();
+        $contracts = $contractRepository->findAll();
 
-        $view = $this->view($persons)
+        $view = $this->view($contracts)
             ->setFormat('json')
             ->setHeaders([
                 'Content-Type' => 'application/json',
@@ -35,14 +35,14 @@ class PersonApiController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/show/{personId}", methods={"GET"})
-     * @param $personId
+     * @Route("/show/{contractId}", methods={"GET"})
+     * @param Contract $contract
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show($personId)
+    public function show($contractId)
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->find($personId);
-        $view = $this->view($person)
+        $contract = $this->getDoctrine()->getRepository(Contract::class)->find($contractId);
+        $view = $this->view($contract)
             ->setFormat('json')
             ->setHeaders([
                 'Content-Type' => 'application/json',

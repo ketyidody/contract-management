@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RentalObjectRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=RentalObjectRepository::class)
@@ -55,6 +56,29 @@ class RentalObject
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("contractId")
+     */
+    public function contractId()
+    {
+        return $this->contract->getId();
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("residentIds")
+     */
+    public function residentIds()
+    {
+        $residentIds = [];
+        foreach ($this->contract->getResidents() as $resident) {
+            $residentIds[$resident->getId()] = $resident->__toString();
+        }
+
+        return $residentIds;
     }
 
     public function getId(): ?int

@@ -36,6 +36,16 @@
                 <td>{{ rental_object.description }}</td>
             </tr>
             <tr>
+                <th>Residents</th>
+                <td>
+                    {% for resident in rental_object.contract.residents %}
+                        <a href="{{ url('person_show', {'id': resident.id}) }}">
+                            {{ resident }}
+                        </a>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
                 <th>Contract</th>
                 <td>
                     <a href="{{ url('contract_show', {'id': rental_object.contract.id}) }}">

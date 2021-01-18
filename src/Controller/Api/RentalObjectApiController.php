@@ -2,28 +2,28 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Person;
-use App\Repository\PersonRepository;
+use App\Entity\RentalObject;
+use App\Repository\RentalObjectRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/person")
+ * @Route("/rental_object")
  */
-class PersonApiController extends AbstractFOSRestController
+class RentalObjectApiController extends AbstractFOSRestController
 {
     /**
      * @Rest\Get("/index")
      *
      * @return Response
      */
-    public function index(PersonRepository $personRepository)
+    public function index(RentalObjectRepository $rentalObjectRepository)
     {
-        $persons = $personRepository->findAll();
+        $rentalObjects = $rentalObjectRepository->findAll();
 
-        $view = $this->view($persons)
+        $view = $this->view($rentalObjects)
             ->setFormat('json')
             ->setHeaders([
                 'Content-Type' => 'application/json',
@@ -35,14 +35,14 @@ class PersonApiController extends AbstractFOSRestController
     }
 
     /**
-     * @Route("/show/{personId}", methods={"GET"})
-     * @param $personId
+     * @Route("/show/{rentalObjectId}", methods={"GET"})
+     * @param $rentalObjectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show($personId)
+    public function show($rentalObjectId)
     {
-        $person = $this->getDoctrine()->getRepository(Person::class)->find($personId);
-        $view = $this->view($person)
+        $rentalObject = $this->getDoctrine()->getRepository(RentalObject::class)->find($rentalObjectId);
+        $view = $this->view($rentalObject)
             ->setFormat('json')
             ->setHeaders([
                 'Content-Type' => 'application/json',

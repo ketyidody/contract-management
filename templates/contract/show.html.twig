@@ -28,6 +28,16 @@
             <td>{{ contract.rent }}</td>
         </tr>
         <tr>
+            <th>Residents</th>
+            <td>
+                {% for resident in contract.residents %}
+                    <a href="{{ path('person_show', {'id':  resident.id}) }}">
+                        {{ resident }}
+                    </a>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
             <th>Contract Parties</th>
             <td>
                 {% for contractParty in contract.contractParties %}

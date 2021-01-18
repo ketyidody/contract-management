@@ -6,6 +6,7 @@ use App\Repository\ContractRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=ContractRepository::class)
@@ -40,7 +41,11 @@ class Contract
     private $rent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Person::class, mappedBy="contract")
+     * @ORM\ManyToMany(targetEntity=Person::class)
+     * @ORM\JoinTable(name="contracts_residents",
+     *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="resident_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $residents;
 
@@ -59,6 +64,45 @@ class Contract
     {
         $this->residents = new ArrayCollection();
         $this->contractParties = new ArrayCollection();
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("residentIds")
+     */
+    public function residentIds()
+    {
+        $residentIds = [];
+        /** @var Person $person */
+        foreach ($this->residents as $person) {
+            $residentIds[$person->getId()] = $person->__toString();
+        }
+
+        return $residentIds;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("contractPartyIds")
+     */
+    public function contractPartyIds()
+    {
+        $contractPartyIds = [];
+        /** @var Person $person */
+        foreach ($this->contractParties as $person) {
+            $contractPartyIds[$person->getId()] = $person->__toString();
+        }
+
+        return $contractPartyIds;
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("rentalObjectId")
+     */
+    public function rentalObjectId()
+    {
+        return [$this->rentalObject->getId() => $this->rentalObject->getName()];
     }
 
     public function __toString()
@@ -131,6 +175,7 @@ class Contract
     {
         if (!$this->residents->contains($resident)) {
             $this->residents[] = $resident;
+            $resident->setResident($this);
         }
 
         return $this;
@@ -139,6 +184,10 @@ class Contract
     public function setResidents(ArrayCollection $residents): self
     {
         $this->residents = $residents;
+        /** @var Person $resident */
+        foreach ($residents as $resident) {
+            $resident->setResident($this);
+        }
 
         return $this;
     }

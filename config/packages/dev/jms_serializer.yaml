@@ -1,0 +1,12 @@
+jms_serializer:
+    visitors:
+        json_serialization:
+            options:
+                - JSON_PRETTY_PRINT
+                - JSON_UNESCAPED_SLASHES
+                - JSON_PRESERVE_ZERO_FRACTION
+    metadata:
+        directories:
+            App:
+                namespace_prefix: 'App\Entity'
+                path: "%kernel.project_dir%/src/serializer/app"

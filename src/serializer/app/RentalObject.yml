@@ -1,0 +1,22 @@
+App\Entity\RentalObject:
+  exclusion_policy: ALL
+  properties:
+    id:
+      exclude: false
+    name:
+      exclude: false
+    address:
+      exclude: false
+    city:
+      exclude: false
+    country:
+      exclude: false
+    numberOfRooms:
+      exclude: false
+    description:
+      exclude: false
+  virtual_properties:
+    contractId:
+      exclude: false
+    residentIds:
+      exclude: false

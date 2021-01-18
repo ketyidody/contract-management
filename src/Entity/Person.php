@@ -6,6 +6,7 @@ use App\Repository\PersonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=PersonRepository::class)
@@ -49,15 +50,24 @@ class Person
      */
     private $contracts;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="residents")
-     * @ORM\JoinColumn(name="resident_id", referencedColumnName="id", nullable=true)
-     */
-    private $resident;
-
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
+    }
+
+    /**
+     * @JMS\VirtualProperty
+     * @JMS\SerializedName("contractIds")
+     */
+    public function contractIds()
+    {
+        $contractIds = [];
+        /** @var Contract $contract */
+        foreach ($this->contracts as $contract) {
+            $contractIds[] = $contract->getId();
+        }
+
+        return $contractIds;
     }
 
     public function __toString()
@@ -124,6 +134,13 @@ class Person
         return $this;
     }
 
+    public function setContracts(ArrayCollection $contracts): self
+    {
+        $this->contracts = $contracts;
+
+        return $this;
+    }
+
     public function removeContract(Contract $contract): self
     {
         if ($this->contracts->removeElement($contract)) {
@@ -143,21 +160,5 @@ class Person
         $this->pType = $pType;
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getResident()
-    {
-        return $this->resident;
-    }
-
-    /**
-     * @param mixed $resident
-     */
-    public function setResident($resident): void
-    {
-        $this->resident = $resident;
     }
 }

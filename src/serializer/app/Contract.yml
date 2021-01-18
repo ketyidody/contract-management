@@ -1,0 +1,20 @@
+App\Entity\Contract:
+  exclusion_policy: ALL
+  properties:
+    id:
+      exclude: false
+    startDate:
+      exclude: false
+    endDate:
+      exclude: false
+    noticePeriod:
+      exclude: false
+    rent:
+      exclude: false
+  virtual_properties:
+    residentIds:
+      exclude: false
+    contractPartyIds:
+      exclude: false
+    rentalObjectId:
+      exclude: false

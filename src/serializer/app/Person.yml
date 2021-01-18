@@ -1,0 +1,16 @@
+App\Entity\Person:
+  exclusion_policy: ALL
+  properties:
+    id:
+      exclude: false
+    firstName:
+      exclude: false
+    lastName:
+      exclude: false
+    personid:
+      exclude: false
+    pType:
+      exclude: false
+  virtual_properties:
+    contractIds:
+      exclude: false

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contract;
+use App\Entity\Person;
 use App\Form\ContractType;
 use App\Repository\ContractRepository;
 use App\Services\EntityManagementService;
