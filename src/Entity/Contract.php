@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ContractRepository::class)
+ * @Assert\Callback({"App\Validator\DateValidator", "validate"})
  */
 class Contract
 {
@@ -56,7 +58,8 @@ class Contract
     private $contractParties;
 
     /**
-     * @ORM\OneToOne(targetEntity=RentalObject::class, mappedBy="contract", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=RentalObject::class, inversedBy="contracts", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="rental_object_id", referencedColumnName="id")
      */
     private $rentalObject;
 
@@ -107,7 +110,7 @@ class Contract
 
     public function __toString()
     {
-        return (string) 'Contract #' . $this->getId();
+        return (string) $this->startDate->format('Y-m-d') . ' - ' . $this->endDate->format('Y-m-d');
     }
 
     public function getId(): ?int
@@ -243,8 +246,8 @@ class Contract
         }
 
         // set the owning side of the relation if necessary
-        if ($rentalObject !== null && $rentalObject->getContract() !== $this) {
-            $rentalObject->setContract($this);
+        if ($rentalObject !== null && $rentalObject->getContracts() !== $this) {
+            $rentalObject->addContract($this);
         }
 
         $this->rentalObject = $rentalObject;

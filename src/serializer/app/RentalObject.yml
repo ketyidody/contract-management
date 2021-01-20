@@ -16,7 +16,5 @@ App\Entity\RentalObject:
     description:
       exclude: false
   virtual_properties:
-    contractId:
-      exclude: false
-    residentIds:
+    contractIds:
       exclude: false

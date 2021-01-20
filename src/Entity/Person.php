@@ -64,7 +64,7 @@ class Person
         $contractIds = [];
         /** @var Contract $contract */
         foreach ($this->contracts as $contract) {
-            $contractIds[] = $contract->getId();
+            $contractIds[$contract->getId()] = $contract->__toString();
         }
 
         return $contractIds;

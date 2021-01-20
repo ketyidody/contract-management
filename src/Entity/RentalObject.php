@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RentalObjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
@@ -44,14 +46,19 @@ class RentalObject
     private $numberOfRooms;
 
     /**
-     * @ORM\OneToOne(targetEntity=Contract::class, inversedBy="rentalObject", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Contract::class, mappedBy="rentalObject", cascade={"persist", "remove"})
      */
-    private $contract;
+    private $contracts;
 
     /**
      * @ORM\Column(type="text")
      */
     private $description;
+
+    public function __construct()
+    {
+        $this->contracts = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -60,25 +67,15 @@ class RentalObject
 
     /**
      * @JMS\VirtualProperty
-     * @JMS\SerializedName("contractId")
+     * @JMS\SerializedName("contractIds")
      */
-    public function contractId()
+    public function contractIds()
     {
-        return $this->contract->getId();
-    }
-
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("residentIds")
-     */
-    public function residentIds()
-    {
-        $residentIds = [];
-        foreach ($this->contract->getResidents() as $resident) {
-            $residentIds[$resident->getId()] = $resident->__toString();
+        $contractIds = [];
+        foreach ($this->getContracts() as $contract) {
+            $contractIds[$contract->getId()] = $contract->__toString();
         }
-
-        return $residentIds;
+        return $contractIds;
     }
 
     public function getId(): ?int
@@ -146,14 +143,23 @@ class RentalObject
         return $this;
     }
 
-    public function getContract(): ?Contract
+    public function getContracts(): Collection
     {
-        return $this->contract;
+        return $this->contracts;
     }
 
-    public function setContract(?Contract $contract): self
+    public function addContract(Contract $contract): self
     {
-        $this->contract = $contract;
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts[] = $contract;
+        }
+
+        return $this;
+    }
+
+    public function setContracts(ArrayCollection $contracts): self
+    {
+        $this->contracts = $contracts;
 
         return $this;
     }

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/rental/object")
+ * @Route("/rental-object")
  */
 class RentalObjectController extends AbstractController
 {

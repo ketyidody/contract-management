@@ -20,9 +20,6 @@ class RentalObjectType extends AbstractType
             ->add('country')
             ->add('numberOfRooms')
             ->add('description')
-            ->add('contract', EntityType::class, [
-                'class' => Contract::class
-            ])
         ;
     }
 
