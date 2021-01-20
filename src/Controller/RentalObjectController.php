@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contract;
 use App\Entity\RentalObject;
 use App\Form\RentalObjectType;
 use App\Repository\RentalObjectRepository;
@@ -53,8 +54,10 @@ class RentalObjectController extends AbstractController
      */
     public function show(RentalObject $rentalObject): Response
     {
+        $sortedContracts = $this->getDoctrine()->getRepository(Contract::class)->getSortedContracts($rentalObject);
         return $this->render('rental_object/show.html.twig', [
             'rental_object' => $rentalObject,
+            'sorted_contracts' => $sortedContracts,
         ]);
     }
 

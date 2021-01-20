@@ -38,10 +38,15 @@
             <tr>
                 <th>Contract</th>
                 <td>
-                    {% for contract in rental_object.contracts %}
-                        <a href="{{ url('contract_show', {'id': contract.id}) }}">
-                            {{ contract }}
-                        </a>
+                    {% for title, contracts in sorted_contracts %}
+                        <p clas="contracts__sub_title">
+                            {{ title }}
+                        </p>
+                        {% for contract in contracts %}
+                            <a href="{{ url('contract_show', {'id': contract.id}) }}">
+                                {{ contract }}
+                            </a>
+                        {% endfor %}
                     {% endfor %}
                 </td>
             </tr>

@@ -32,15 +32,15 @@ class DateValidator
             return;
         }
 
-        // Start date or/and end date is in the past
-        $now = (new \DateTime())->modify('today midnight');
-        if ($object->getStartDate() < $now) {
-            $context->buildViolation(self::MESSAGE_PAST_DATE)
-                ->addViolation()
-            ;
-
-            return;
-        }
+//        // Start date or/and end date is in the past
+//        $now = (new \DateTime())->modify('today midnight');
+//        if ($object->getStartDate() < $now) {
+//            $context->buildViolation(self::MESSAGE_PAST_DATE)
+//                ->addViolation()
+//            ;
+//
+//            return;
+//        }
 
         $requestedDateRange = new DateRange($object->getStartDate(), $object->getEndDate());
 
