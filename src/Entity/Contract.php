@@ -46,7 +46,7 @@ class Contract
      * @ORM\ManyToMany(targetEntity=Person::class)
      * @ORM\JoinTable(name="contracts_residents",
      *      joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="resident_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="resident_id", referencedColumnName="id", unique=false)}
      *      )
      */
     private $residents;
