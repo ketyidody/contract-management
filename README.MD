@@ -35,6 +35,7 @@ Website made for Fairwalter company job application
     - edit .env with your favorite text editor (mainly edit db_user and db_password)
     - composer install
     - yarn encore production (to install yarn visit https://classic.yarnpkg.com/en/docs/install/ or use "npm run build")
+    - bin/console doctrine:database:create
     - bin/console doctrine:schema:create
     - bin/console doctrine:fixtures:load
     - symfony server:start

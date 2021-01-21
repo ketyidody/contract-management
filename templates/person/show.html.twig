@@ -25,13 +25,15 @@
             </tr>
             <tr>
                 <th>Contracts</th>
-                {% for contract in person.contracts %}
-                    <td>
-                        <a href="{{ path('contract_show', {'id': contract.id}) }}">
-                            {{ contract }}
-                        </a>
-                    </td>
-                {% endfor %}
+                <td>
+                    {% for contract in person.contracts %}
+                        <p>
+                            <a href="{{ path('contract_show', {'id': contract.id}) }}">
+                                {{ contract }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>
