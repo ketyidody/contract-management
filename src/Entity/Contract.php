@@ -178,7 +178,6 @@ class Contract
     {
         if (!$this->residents->contains($resident)) {
             $this->residents[] = $resident;
-            $resident->setResident($this);
         }
 
         return $this;
