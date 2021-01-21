@@ -32,15 +32,15 @@ class DateValidator
             return;
         }
 
-//        // Start date or/and end date is in the past
-//        $now = (new \DateTime())->modify('today midnight');
-//        if ($object->getStartDate() < $now) {
-//            $context->buildViolation(self::MESSAGE_PAST_DATE)
-//                ->addViolation()
-//            ;
-//
-//            return;
-//        }
+        // Start date or/and end date is in the past
+        $now = (new \DateTime())->modify('today midnight');
+        if ($object->getStartDate() < $now) {
+            $context->buildViolation(self::MESSAGE_PAST_DATE)
+                ->addViolation()
+            ;
+
+            return;
+        }
 
         $requestedDateRange = new DateRange($object->getStartDate(), $object->getEndDate());
 
@@ -64,7 +64,6 @@ class DateValidator
 
     protected static function isDatesOverlap(DateRange $occupiedDateRange, DateRange $requestedDateRange)
     {
-        dump($occupiedDateRange, $requestedDateRange);
         if ($occupiedDateRange->getFrom() > $requestedDateRange->getTo()) {
             return false;
         }
